@@ -5,7 +5,17 @@ Progress so far :
 
 1. Setup a NodeJS API Project. This repo is supposed to be used as the backend of twin-leaks.
 2. Added an endpoint called compareContracts. This API endpoint takes 2 ethereum addresses, does the required validation and then returns the user an object with the bytecodes and jaro similarity between the bytecodes. Jaro similarity is a metric used to compare similarity between two strings. 
-3. To run, pull the latest changes and open a terminal in the twin-leak directory. Type "nodemon index.js" to run. If you don't have nodemon installed. Please install nodemon by running "npm install nodemon". 
+
+The endpoint supports POST request and the body is structured as follows. 
+
+{
+    "address1": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    "address2": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F"
+} 
+
+In the above example, address1 is the UniswapV2Router contract address and address2 is the SushisSwapV2Router Address.
+
+4. To run, pull the latest changes and open a terminal in the twin-leak directory. Type "nodemon index.js" to run. If you don't have nodemon installed. Please install nodemon by running "npm install nodemon". 
 
 
 
