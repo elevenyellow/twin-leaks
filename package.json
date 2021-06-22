@@ -1,0 +1,26 @@
+{
+  "name": "twin-leaks",
+  "version": "1.0.0",
+  "description": "Fork detector by elevenYellow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elevenyellow/twin-leaks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elevenyellow/twin-leaks/issues"
+  },
+  "homepage": "https://github.com/elevenyellow/twin-leaks#readme",
+  "dependencies": {
+    "evm": "^0.2.0",
+    "jaro-winkler": "^0.2.8",
+    "joi": "^17.4.0",
+    "nodemon": "^2.0.7",
+    "web3": "^1.3.6"
+  }
+}
