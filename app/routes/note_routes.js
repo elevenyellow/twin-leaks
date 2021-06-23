@@ -6,6 +6,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io
 const Joi = require("joi");
 const { compareContractsPayloadSchema } = require("../schemas/schemas");
 const string_utils = require("../utils/string_utils");
+const block_utils = require("../utils/block_utils");
 
 
 var jsonParser = bodyParser.json()
@@ -13,7 +14,7 @@ var jsonParser = bodyParser.json()
 
 module.exports = function (app, db) {
     app.post("/compareContracts", jsonParser, async (req, res) => {
-        
+
         var result = {
             "isError": true,
             "errorMsg": "Something went wrong",
@@ -59,6 +60,14 @@ module.exports = function (app, db) {
             }
 
         }
+    })
+
+
+    app.post("/test", jsonParser, async (req, res) => {
+
+        res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
+        // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1624447227, 1624447347, web3));
+
     })
 
 }
