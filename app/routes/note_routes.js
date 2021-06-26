@@ -65,8 +65,12 @@ module.exports = function (app, db) {
 
     app.post("/test", jsonParser, async (req, res) => {
 
-        res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
+        // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
         // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1624447227, 1624447347, web3));
+
+        res.send(await block_utils.compare_contract_to_top_defi_protocols("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", web3));
+
+
 
     })
 
