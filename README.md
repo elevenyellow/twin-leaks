@@ -19,7 +19,6 @@ The endpoint supports POST request and the body is structured as follows.
 
 In the above example, address1 is the UniswapV2Router contract address and address2 is the SushisSwapV2Router Address.
 
-3. 
 
 **June 23, 2021**
 
@@ -35,7 +34,7 @@ Only Unix timestamps to be used at this point.
 Added a function to compare a contract's to all the popular porotocols'. Added multi chain support. Added new algorithm to compare bytecodes (Dice simiarity coefficients.)
 
 
-4. To run, pull the latest changes and open a terminal in the twin-leak directory. Type "nodemon index.js" to run. If you don't have nodemon installed. Please install nodemon by running "npm install nodemon". 
+3. To run, pull the latest changes and open a terminal in the twin-leak directory. Type "nodemon index.js" to run. If you don't have nodemon installed. Please install nodemon by running "npm install nodemon". 
 
 
 
