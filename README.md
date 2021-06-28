@@ -6,7 +6,7 @@ Progress so far :
 1. Setup a NodeJS API Project. This repo is supposed to be used as the backend of twin-leaks.
 2. 
 
-June 22, 2021
+**June 22, 2021**
 
 Added an endpoint called compareContracts. This API endpoint takes 2 ethereum addresses, does the required validation and then returns the user an object with the bytecodes and jaro similarity between the bytecodes. Jaro similarity is a metric used to compare similarity between two strings. 
 
@@ -21,7 +21,7 @@ In the above example, address1 is the UniswapV2Router contract address and addre
 
 3. 
 
-June 23, 2021
+**June 23, 2021**
 
 Added block_utils.js, Created 2 functions which enables us to fetch :
     1. All the blocks between 2 timestamps. 
@@ -30,12 +30,18 @@ Added block_utils.js, Created 2 functions which enables us to fetch :
 Only Unix timestamps to be used at this point. 
 
 
+**June 24, 2021 - June 29, 2021**
+
+Added a function to compare a contract's to all the popular porotocols'. Added multi chain support. Added new algorithm to compare bytecodes (Dice simiarity coefficients.)
+
+
 4. To run, pull the latest changes and open a terminal in the twin-leak directory. Type "nodemon index.js" to run. If you don't have nodemon installed. Please install nodemon by running "npm install nodemon". 
 
 
 
+
 To do :
-1. Create a mechanism to compare one protocol smart contract to all of the popular protocols' smart contract. 
-2. Add support for different blockchains (BSC, etc).
+1. Create a mechanism to compare one protocol smart contract to all of the popular protocols' smart contract. (Done)
+2. Add support for different blockchains (BSC, etc). (Done)
 3. Add more metrics to compare smart contracts. 
 4. Create a UI and deploy. 

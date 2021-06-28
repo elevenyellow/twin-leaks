@@ -9,18 +9,18 @@ const string_utils = require("../utils/string_utils");
 const block_utils = require("../utils/block_utils");
 
 
-var jsonParser = bodyParser.json()
+let jsonParser = bodyParser.json()
 
 
 module.exports = function (app, db) {
     app.post("/compareContracts", jsonParser, async (req, res) => {
 
-        var result = {
+        let result = {
             "isError": true,
             "errorMsg": "Something went wrong",
         }
 
-        var _req = req.body;
+        let _req = req.body;
         const validationResult = compareContractsPayloadSchema.validate(_req)
 
         if (validationResult.error) {
@@ -30,8 +30,8 @@ module.exports = function (app, db) {
 
         } else {
             try {
-                var address1Bytecode = await web3.eth.getCode(_req.address1);
-                var address2Bytecode = await web3.eth.getCode(_req.address2);
+                let address1Bytecode = await web3.eth.getCode(_req.address1);
+                let address2Bytecode = await web3.eth.getCode(_req.address2);
 
                 if (address2Bytecode == "0x" || address1Bytecode == "0x") {
                     result.errorMsg = "Bytecode of one contract came out to be 0x"
@@ -66,11 +66,9 @@ module.exports = function (app, db) {
     app.post("/test", jsonParser, async (req, res) => {
 
         // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
-        // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1624447227, 1624447347, web3));
-
-        res.send(await block_utils.compare_contract_to_top_defi_protocols("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", web3));
-
-
+        // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1591388181, 1591388241, "Ethereum"));
+        
+        res.send(await block_utils.compare_contract_to_top_defi_protocols("0x10ED43C718714eb63d5aA57B78B54704E256024E", "BSC"));
 
     })
 

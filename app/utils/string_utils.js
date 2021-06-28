@@ -1,9 +1,10 @@
-var distance = require('jaro-winkler');
+let distance = require('jaro-winkler');
+let stringSimilarity = require("string-similarity");
 
 function compare_bytecodes_by_jaro(Bytecode1, Bytecode2) {
     result = null
     try {
-        var similarity = distance(Bytecode1, Bytecode2);
+        let similarity = distance(Bytecode1, Bytecode2);
         return similarity;
 
     } catch (error) {
@@ -11,4 +12,17 @@ function compare_bytecodes_by_jaro(Bytecode1, Bytecode2) {
     }
 }
 
-module.exports = { compare_bytecodes_by_jaro }
+
+function compare_bytecodes_by_dice(Bytecode1, Bytecode2) {
+    result = null
+    try {
+        let similarity = stringSimilarity.compareTwoStrings(Bytecode1, Bytecode2);
+        return similarity;
+
+    } catch (error) {
+        return result;
+    }
+}
+
+
+module.exports = { compare_bytecodes_by_jaro, compare_bytecodes_by_dice }

@@ -6,7 +6,7 @@ const app = express();
 
 const port = 8000;
 
-var jsonParser = bodyParser.json()
+let jsonParser = bodyParser.json()
 
 
 require('./app/routes')(app, {});
