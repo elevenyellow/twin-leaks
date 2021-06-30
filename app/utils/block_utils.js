@@ -123,8 +123,7 @@ function get_provider_for_chain(chain) {
             return new Web3(new Web3.providers.HttpProvider(consts.binance_rpc_url));
 
         default:
-            return new Web3(new Web3.providers.HttpProvider(consts.ethereum_rpc_url));;
-
+            return new Web3(new Web3.providers.HttpProvider(consts.ethereum_rpc_url));
     }
 
 }

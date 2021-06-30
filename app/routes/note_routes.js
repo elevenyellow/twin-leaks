@@ -68,11 +68,14 @@ module.exports = function (app, db) {
         // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
         // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1591388181, 1591388241, "Ethereum"));
         
-        res.send(await block_utils.compare_contract_to_top_defi_protocols("0x10ED43C718714eb63d5aA57B78B54704E256024E", "BSC"));
+        res.send(await block_utils.compare_contract_to_top_defi_protocols("0x124c6092c469716A661b5B0609F205050b26b50f", "Ethereum"));
 
     })
 
 }
+
+
+
 
 
 
