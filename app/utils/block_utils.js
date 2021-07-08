@@ -77,12 +77,14 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
     let result = [];
     let web3;
 
+
     try {
 
         web3 = get_provider_for_chain(chain);
         let contractAddressBytecode = await web3.eth.getCode(contractAddress);
 
         for (let i = 0; i < consts.TOP_DEFI_PROTOCOL_LIST.length; i++) {
+            // console.log("HERE");
 
             // Compare protocol byte code to contract byte code
             let temp = {};
@@ -100,10 +102,11 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
             temp["protocol_address"] = protocol["address"];
             temp["contract_address"] = contractAddress;
             // temp["protocol_bytecode"] = protocolBytecode;
-
+            console.log("Done!");
             result.push(temp);
         }
 
+        console.log("returning result");
         return result;
 
     } catch (error) {
@@ -127,4 +130,4 @@ function get_provider_for_chain(chain) {
     }
 
 }
-module.exports = { get_all_blocks_between_2_timestamps, get_all_contracts_created_between_2_timestamps, compare_contract_to_top_defi_protocols }
+module.exports = { get_all_blocks_between_2_timestamps, get_all_contracts_created_between_2_timestamps, compare_contract_to_top_defi_protocols, get_provider_for_chain }

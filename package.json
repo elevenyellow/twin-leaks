@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/elevenyellow/twin-leaks#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "ethereum-block-by-date": "^1.4.0",
     "evm": "^0.2.0",
+    "firebase": "^8.7.0",
     "jaro-winkler": "^0.2.8",
     "joi": "^17.4.0",
     "nodemon": "^2.0.7",
