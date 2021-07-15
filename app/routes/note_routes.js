@@ -9,6 +9,7 @@ const string_utils = require("../utils/string_utils");
 const block_utils = require("../utils/block_utils");
 const { TOP_DEFI_PROTOCOL_LIST } = require("../utils/consts");
 const db = require("../../db").firebase_database;
+const coingecko_utils = require("../utils/coingecko_utils");
 
 
 let jsonParser = bodyParser.json()
@@ -40,7 +41,7 @@ module.exports = function (app, _db) {
                 } else {
                     console.log("All validation checks complete. Process now.");
                     result_list = await block_utils.compare_contract_to_top_defi_protocols(_req.contractAddress, _req.chain); //It will be a list if all ok, null if some error
-                    console.log(result_list);
+                    console.log("result list", result_list);
                     if (result_list) {
                         result.isError = false;
                         result.errorMsg = "SUCCESS";
@@ -62,17 +63,34 @@ module.exports = function (app, _db) {
 
     app.post("/test", jsonParser, async (req, res) => {
 
-        // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
-        // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1591388181, 1591388241, "Ethereum"));
-        // res.send(await block_utils.compare_contract_to_top_defi_protocols("0x227e79C83065edB8B954848c46ca50b96CB33E16", "BSC"));
+
+        coingecko_utils.getTokenStats("sdfadf");
+
+        // console.log("HI")
+        // // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));
+        // // res.send(await block_utils.get_all_contracts_created_between_2_timestamps(1591388181, 1591388241, "Ethereum"));
+        // // res.send(await block_utils.compare_contract_to_top_defi_protocols("0x227e79C83065edB8B954848c46ca50b96CB33E16", "BSC"));
 
 
-        for (var i = 0; i < TOP_DEFI_PROTOCOL_LIST.length; i++) {
-            var name = TOP_DEFI_PROTOCOL_LIST[i].name;
-            // // console.log(name);
-            // // console.log(TOP_DEFI_PROTOCOL_LIST[i]);
-            db.ref("/top_protocols/" + name).set(TOP_DEFI_PROTOCOL_LIST[i])
-        }
+        // for (var i = 0; i < TOP_DEFI_PROTOCOL_LIST.length; i++) {
+        //     var name = TOP_DEFI_PROTOCOL_LIST[i].name;
+        //     // console.log(name);
+        //     var address = TOP_DEFI_PROTOCOL_LIST[i].address;
+
+        //     _web3 = block_utils.get_provider_for_chain(TOP_DEFI_PROTOCOL_LIST[i].chain)
+
+        //     _byteCode = await _web3.eth.getCode(TOP_DEFI_PROTOCOL_LIST[i].address);
+
+        //     var _protocol = TOP_DEFI_PROTOCOL_LIST[i];
+
+        //     _protocol["byteCode"] = _byteCode;
+
+
+
+        //     db.ref("/top_protocols/" + name).set(_protocol)
+        // }
+
+        // res.send("DONE");
     })
 }
 

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/elevenyellow/twin-leaks#readme",
   "dependencies": {
+    "coingecko-api": "^1.0.10",
     "cors": "^2.8.5",
     "ethereum-block-by-date": "^1.4.0",
     "evm": "^0.2.0",

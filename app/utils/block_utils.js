@@ -3,6 +3,8 @@ const moment = require('moment');
 const Web3 = require('web3');
 const consts = require("../utils/consts.js");
 const string_utils = require("../utils/string_utils.js");
+const coingecko_utils = require("../utils/coingecko_utils.js");
+const db = require("../../db").firebase_database;
 
 
 async function get_all_blocks_between_2_timestamps(timestamp1, timestamp2, chain) {
@@ -82,6 +84,19 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
 
         web3 = get_provider_for_chain(chain);
         let contractAddressBytecode = await web3.eth.getCode(contractAddress);
+        let allProtocolsFromFirebase;
+        console.log("I AM HERE")
+        await Promise.all([
+            db.ref('/top_protocols/').once('value', (snapshot) => {
+                // console.log(snapshot.val());
+                allProtocolsFromFirebase = snapshot.val();
+            })
+        ]);
+
+        console.log(allProtocolsFromFirebase);
+
+        
+
 
         for (let i = 0; i < consts.TOP_DEFI_PROTOCOL_LIST.length; i++) {
             // console.log("HERE");
@@ -90,19 +105,30 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
             let temp = {};
             let protocol = consts.TOP_DEFI_PROTOCOL_LIST[i];
 
-            let _web3;
-            console.log(protocol["chain"]);
-            _web3 = get_provider_for_chain(protocol["chain"]);
+            // let _web3;
+            // console.log(protocol["chain"]);
+            // _web3 = get_provider_for_chain(protocol["chain"]);
 
-            let protocolBytecode = await _web3.eth.getCode(protocol["address"]);
+            // let protocolBytecode = await _web3.eth.getCode(protocol["address"]);
+
+            let protocolBytecode = allProtocolsFromFirebase[protocol.name]["byteCode"];
+            let coingeckoApiId = allProtocolsFromFirebase[protocol.name]["coingeckoApiId"];
+            let market_cap = null;
+            if (coingeckoApiId) {
+                market_cap = await coingecko_utils.getTokenMarketCap(coingeckoApiId);
+            }
+
+
+
             let similarity = string_utils.compare_bytecodes_by_dice(contractAddressBytecode, protocolBytecode);
 
             temp["comparisonTo"] = protocol["name"];
             temp["dice_similarity_coefficient"] = similarity;
             temp["protocol_address"] = protocol["address"];
+            temp["protocol_marketcap_usd"] = market_cap;
             temp["contract_address"] = contractAddress;
             // temp["protocol_bytecode"] = protocolBytecode;
-            console.log("Done!");
+            // console.log("Done!");
             result.push(temp);
         }
 
