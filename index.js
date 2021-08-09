@@ -14,5 +14,5 @@ let jsonParser = bodyParser.json()
 require('./app/routes')(app, {});
 
 let server = app.listen(port, () => {
-    console.log("We are live on port", port);
+    console.log("We are live on port on new mac", port);
 })
