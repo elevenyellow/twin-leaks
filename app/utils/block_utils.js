@@ -95,30 +95,22 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
 
         console.log(allProtocolsFromFirebase);
 
-        
+        const TOP_PROTOCOLS_NAME_LIST = Object.keys(allProtocolsFromFirebase);
 
 
-        for (let i = 0; i < consts.TOP_DEFI_PROTOCOL_LIST.length; i++) {
-            // console.log("HERE");
+        for (let i = 0; i < TOP_PROTOCOLS_NAME_LIST.length; i++) {
 
-            // Compare protocol byte code to contract byte code
+            
             let temp = {};
-            let protocol = consts.TOP_DEFI_PROTOCOL_LIST[i];
+            let protocol_name = TOP_PROTOCOLS_NAME_LIST[i];
+            let protocol = allProtocolsFromFirebase[protocol_name];
 
-            // let _web3;
-            // console.log(protocol["chain"]);
-            // _web3 = get_provider_for_chain(protocol["chain"]);
-
-            // let protocolBytecode = await _web3.eth.getCode(protocol["address"]);
-
-            let protocolBytecode = allProtocolsFromFirebase[protocol.name]["byteCode"];
-            let coingeckoApiId = allProtocolsFromFirebase[protocol.name]["coingeckoApiId"];
-            let market_cap = null;
-            if (coingeckoApiId) {
-                market_cap = await coingecko_utils.getTokenMarketCap(coingeckoApiId);
+            let protocolBytecode = protocol["byteCode"];
+      
+            let market_cap = 0;
+            if (protocol["market_cap"] != undefined) {
+                market_cap = protocol["market_cap"];
             }
-
-
 
             let similarity = string_utils.compare_bytecodes_by_dice(contractAddressBytecode, protocolBytecode);
 
@@ -136,6 +128,7 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
         return result;
 
     } catch (error) {
+        console.log(error);
         return null;
     }
 

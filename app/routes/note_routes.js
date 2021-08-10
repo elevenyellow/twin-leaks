@@ -64,7 +64,40 @@ module.exports = function (app, _db) {
     app.post("/test", jsonParser, async (req, res) => {
 
 
-        coingecko_utils.getTokenStats("sdfadf");
+        let allProtocolsFromFirebase;
+        console.log("I AM HERE")
+        await Promise.all([
+            db.ref('/top_protocols/').once('value', (snapshot) => {
+                // console.log(snapshot.val());
+                allProtocolsFromFirebase = snapshot.val();
+            })
+        ]);
+
+        console.log(Object.keys(allProtocolsFromFirebase));
+        let list_keys = Object.keys(allProtocolsFromFirebase);
+
+
+        for (let i = 0; i < list_keys.length; i++) {
+
+            let protocol_name = list_keys[i];
+            let coingecko_id = allProtocolsFromFirebase[protocol_name]["coingeckoApiId"];
+            if (coingecko_id != undefined) {
+                console.log(protocol_name);
+                console.log(coingecko_id);
+                market_cap = await coingecko_utils.getTokenMarketCap(coingecko_id);
+                console.log(market_cap);
+
+                let _protocol = allProtocolsFromFirebase[protocol_name];
+                _protocol["market_cap"] = market_cap;
+
+                db.ref("/top_protocols/" + protocol_name).set(_protocol)
+
+            }
+
+        }
+
+
+
 
         // console.log("HI")
         // // res.send(await block_utils.get_all_blocks_between_2_timestamps(1624447227, 1624447347, web3));

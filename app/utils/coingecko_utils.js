@@ -33,7 +33,7 @@ async function getTokenMarketCap(coingeckoCoinId) {
     // console.log(coingeckoStats);
 
     if (coingeckoStats != null) {
-        console.log("inside the loop");
+        
         result = coingeckoStats["data"]["market_data"]["market_cap"]["usd"];
         // console.log(coingeckoStats);
 
