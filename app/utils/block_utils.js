@@ -117,6 +117,7 @@ async function compare_contract_to_top_defi_protocols(contractAddress, chain = "
             temp["comparisonTo"] = protocol["name"];
             temp["dice_similarity_coefficient"] = similarity;
             temp["protocol_address"] = protocol["address"];
+            temp["chain"] = protocol["chain"];
             temp["protocol_marketcap_usd"] = market_cap;
             temp["contract_address"] = contractAddress;
             // temp["protocol_bytecode"] = protocolBytecode;
